@@ -47,19 +47,7 @@ public class LogTransformer2 implements ClassFileTransformer
                 System.out.println("Failed to instrumnet. method is null");
             }
 
-            // Add code to the beginning of a method
-//            method.addLocalVariable("startTime", CtClass.longType);
-//            method.insertBefore( "startTime = System.currentTimeMillis();");
             method.insertAfter("irach.demo.profiler.LogProfiler.$_INSTANCE.logMethodCalled();");
-
-            // Add code to the end of a method
-//            StringBuilder endBlock = new StringBuilder();
-//            method.addLocalVariable("endTime", CtClass.longType);
-//            method.addLocalVariable("opTime", CtClass.longType);
-//            endBlock.append("endTime = System.currentTimeMillis();");
-//            endBlock.append("opTime = endTime - startTime;");
-//            endBlock.append("System.out.println(\"[Added by Agent] operation time: \" + opTime + \" miliseconds!\");");
-//            method.insertAfter(endBlock.toString());
 
             byteCode = cc.toBytecode();
             cc.detach();
